@@ -10,29 +10,28 @@
 
 推荐从 **[GitHub Releases](https://github.com/BGIResearch/dcs_cli/releases)** 下载，可按版本选择，只下载需要的平台二进制。
 
-### Latest（最新版）
+### Latest（当前最新：v1.1.0）
 
-打开 [Latest Release](https://github.com/BGIResearch/dcs_cli/releases/latest)，按系统下载对应附件：
+发布页：[v1.1.0](https://github.com/BGIResearch/dcs_cli/releases/tag/v1.1.0) · [始终指向最新](https://github.com/BGIResearch/dcs_cli/releases/latest)
 
-| 平台 | 附件名（示例） |
-|------|----------------|
-| Linux (amd64) | `dcs-linux-amd64` |
-| Windows | `dcs.exe` |
+| 平台 | 直接下载 |
+|------|----------|
+| Linux (amd64) | [dcs-linux-amd64](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-linux-amd64) |
+| Windows | [dcs.exe](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs.exe) |
 
-也可直接用浏览器或命令行下载（将 `VERSION` 换成具体版本号，如 `v1.1.0`）：
+命令行安装：
 
 ```bash
-# Linux — 最新版（跟随 latest 跳转）
-# 或指定版本：
+# Linux
 curl -L -o dcs \
-  https://github.com/BGIResearch/dcs_cli/releases/download/VERSION/dcs-linux-amd64
+  https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-linux-amd64
 chmod +x dcs
 sudo mv dcs /usr/local/bin/dcs
 ```
 
 ```powershell
-# Windows PowerShell — 指定版本
-Invoke-WebRequest -Uri "https://github.com/BGIResearch/dcs_cli/releases/download/VERSION/dcs.exe" -OutFile dcs.exe
+# Windows PowerShell
+Invoke-WebRequest -Uri "https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs.exe" -OutFile dcs.exe
 # 将 dcs.exe 所在目录加入 PATH，或放到已有 PATH 目录中
 ```
 
