@@ -17,6 +17,9 @@
 | 平台 | 直接下载 |
 |------|----------|
 | Linux (amd64) | [dcs-linux-amd64](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-linux-amd64) |
+| macOS (Apple Silicon, arm64) | [dcs-darwin-arm64](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-darwin-arm64) |
+| macOS (Intel, amd64) | [dcs-darwin-amd64](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-darwin-amd64) |
+| macOS (Universal) | [dcs-darwin-universal](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-darwin-universal) |
 | Windows | [dcs.exe](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs.exe) |
 
 命令行安装：
@@ -27,6 +30,15 @@ curl -L -o dcs \
   https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-linux-amd64
 chmod +x dcs
 sudo mv dcs /usr/local/bin/dcs
+```
+
+```bash
+# macOS（Apple Silicon 用 arm64；Intel 用 amd64；不确定可用 universal）
+curl -L -o dcs \
+  https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-darwin-arm64
+chmod +x dcs
+sudo mv dcs /usr/local/bin/dcs
+# 若提示无法打开/被拦截：xattr -d com.apple.quarantine /usr/local/bin/dcs
 ```
 
 ```powershell
@@ -46,6 +58,9 @@ Invoke-WebRequest -Uri "https://github.com/BGIResearch/dcs_cli/releases/download
 | 平台 | 路径 |
 |------|------|
 | Linux (amd64) | [`cli/linux/dcs-linux-amd64`](cli/linux/dcs-linux-amd64) |
+| macOS (arm64) | [`cli/macos/dcs-darwin-arm64`](cli/macos/dcs-darwin-arm64) |
+| macOS (amd64) | [`cli/macos/dcs-darwin-amd64`](cli/macos/dcs-darwin-amd64) |
+| macOS (Universal) | [`cli/macos/dcs-darwin-universal`](cli/macos/dcs-darwin-universal) |
 | Windows | [`cli/win/dcs.exe`](cli/win/dcs.exe) |
 
 安装后验证：
