@@ -21,6 +21,7 @@
 | macOS (Intel, amd64) | [dcs-darwin-amd64](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-darwin-amd64) |
 | macOS (Universal) | [dcs-darwin-universal](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-darwin-universal) |
 | Windows | [dcs.exe](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs.exe) |
+| 校验和 | [SHA256SUMS](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/SHA256SUMS) |
 
 命令行安装：
 
@@ -28,6 +29,9 @@
 # Linux
 curl -L -o dcs \
   https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-linux-amd64
+curl -L -o SHA256SUMS \
+  https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/SHA256SUMS
+sha256sum -c SHA256SUMS --ignore-missing   # 校验通过后再执行
 chmod +x dcs
 sudo mv dcs /usr/local/bin/dcs
 ```
@@ -36,6 +40,9 @@ sudo mv dcs /usr/local/bin/dcs
 # macOS（Apple Silicon 用 arm64；Intel 用 amd64；不确定可用 universal）
 curl -L -o dcs \
   https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs-darwin-arm64
+curl -L -o SHA256SUMS \
+  https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/SHA256SUMS
+shasum -a 256 -c SHA256SUMS --ignore-missing
 chmod +x dcs
 sudo mv dcs /usr/local/bin/dcs
 # 若提示无法打开/被拦截：xattr -d com.apple.quarantine /usr/local/bin/dcs
@@ -44,8 +51,27 @@ sudo mv dcs /usr/local/bin/dcs
 ```powershell
 # Windows PowerShell
 Invoke-WebRequest -Uri "https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/dcs.exe" -OutFile dcs.exe
+Invoke-WebRequest -Uri "https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/SHA256SUMS" -OutFile SHA256SUMS
+# 校验（期望哈希见 SHA256SUMS 中 dcs.exe 一行）
+$expected = (Get-Content SHA256SUMS | Where-Object { $_ -match 'dcs\.exe$' }) -replace '\s+dcs\.exe$',''
+$actual = (Get-FileHash -Algorithm SHA256 .\dcs.exe).Hash.ToLower()
+if ($actual -ne $expected.Trim()) { throw "SHA256 mismatch: $actual != $expected" }
 # 将 dcs.exe 所在目录加入 PATH，或放到已有 PATH 目录中
 ```
+
+### 完整性校验（推荐）
+
+每个 Release 附带 [`SHA256SUMS`](https://github.com/BGIResearch/dcs_cli/releases/download/v1.1.0/SHA256SUMS)。下载二进制后应先校验，再执行；校验失败则删除文件，不要运行。
+
+当前 **v1.1.0** 哈希：
+
+| 文件 | SHA256 |
+|------|--------|
+| `dcs-linux-amd64` | `4885fbfbe997229cb8a69602d00215cc2a782ebead8947a0a6c46cc5921ac6ee` |
+| `dcs-darwin-amd64` | `0476ee93b865c6857a6d47e075629c2baa61e7414935a4678cd9bcabdd925cdf` |
+| `dcs-darwin-arm64` | `03663527da4bc648dc0a90a4e96ef03c30cf87b1ed0f8597687770969d4ec498` |
+| `dcs-darwin-universal` | `f0480c0d3dfb67ac962d9224060ace9efaad927b65b96a69203db9bbf1d75667` |
+| `dcs.exe` | `a40a97d029a0c6d7eefc9adf1350cd535b1e48f4e954811c833d7757dfaecbb8` |
 
 ### 历史版本
 
@@ -62,6 +88,7 @@ Invoke-WebRequest -Uri "https://github.com/BGIResearch/dcs_cli/releases/download
 | macOS (amd64) | [`cli/macos/dcs-darwin-amd64`](cli/macos/dcs-darwin-amd64) |
 | macOS (Universal) | [`cli/macos/dcs-darwin-universal`](cli/macos/dcs-darwin-universal) |
 | Windows | [`cli/win/dcs.exe`](cli/win/dcs.exe) |
+| 校验和 | [`SHA256SUMS`](SHA256SUMS) |
 
 安装后验证：
 
