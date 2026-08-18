@@ -125,8 +125,8 @@ dcs project current --output json              # 确认未报 not logged in
 | `data` | Files 浏览、上传、下载、push 入仓 |
 | `table` | 数据表查询 |
 | `terminal` | 在线容器 open/exec/read/create |
-| `task` | 个性化分析离线任务（非 WDL） |
-| `wdl` | WDL 工作流列表、规划、投递 |
+| `analysis` | 个性化分析离线任务（非 WDL） |
+| `workflow` | WDL 工作流列表、规划、投递 |
 | `billing` | 计费组 |
 | `history` | CLI 命令历史 |
 
@@ -145,7 +145,7 @@ dcs project current --output json              # 确认未报 not logged in
 | `ndjson` | 批量结果时每行一条 JSON |
 
 ```bash
-dcs wdl ls --output json
+dcs workflow ls --output json
 dcs terminal open --output json
 dcs project current --output json
 ```
@@ -157,7 +157,7 @@ dcs project current --output json
 部分命令支持用 JSON 传参：
 
 ```bash
-dcs wdl submit_task --json '{"name":"Hello_Test", ...}'
+dcs workflow submit_task --json '{"name":"Hello_Test", ...}'
 dcs data upload --json @params.json    # @文件
 # 或环境变量 DCS_JSON_PARAM
 ```
@@ -165,8 +165,8 @@ dcs data upload --json @params.json    # @文件
 ### 命令自省
 
 ```bash
-dcs wdl plan --describe    # 参数说明
-dcs wdl plan --schema      # JSON Schema
+dcs workflow plan --describe    # 参数说明
+dcs workflow plan --schema      # JSON Schema
 ```
 
 ---
@@ -223,7 +223,7 @@ dcs auth login --token dcs_pat_xxxx --output json
 | `dcs project create` | 创建个人项目 |
 | `dcs project tags` / `omics` / `omics_tools` | 标签与组学元数据 |
 
-**注意**：`terminal`、`wdl`、`data` 等依赖 `current_project`，切换项目后在线容器会话失效，需 `terminal close` 再 `open`。
+**注意**：`terminal`、`workflow`、`data` 等依赖 `current_project`，切换项目后在线容器会话失效，需 `terminal close` 再 `open`。
 
 ---
 
@@ -265,15 +265,15 @@ dcs auth login --token dcs_pat_xxxx --output json
 
 ---
 
-## task — 离线任务（个性化分析，非 WDL）
+## analysis — 离线任务（个性化分析，非 WDL）
 
 | 命令 | 说明 |
 |------|------|
-| `dcs task run -t s -i '<cmd>' -l '<资源>' --image '<镜像>'` | 投递离线任务 |
-| `dcs task ls` | 列任务 |
-| `dcs task info` / `log` / `start` / `cancel` / `rm` / `consume` | 查详情、日志、控制 |
+| `dcs analysis run -t s -i '<cmd>' -l '<资源>' --image '<镜像>'` | 投递离线任务 |
+| `dcs analysis ls` | 列任务 |
+| `dcs analysis info` / `log` / `start` / `cancel` / `rm` / `consume` | 查详情、日志、控制 |
 
-`-l` 与 `--image` 必填。WDL 流程投递用 **`dcs wdl submit_task`**，不要用 `task run`。
+`-l` 与 `--image` 必填。WDL 流程投递用 **`dcs wdl submit_task`**，不要用 `analysis run`。
 
 ---
 
@@ -281,14 +281,14 @@ dcs auth login --token dcs_pat_xxxx --output json
 
 | 命令 | 说明 |
 |------|------|
-| `dcs wdl ls` | 列流程（`-p` 公共库） |
-| `dcs wdl info -n <name>` | 流程详情 |
-| `dcs wdl plan -n <name>` | 多步规划 |
-| `dcs wdl check_parameter -n <name>` | 查参数规格 |
-| `dcs wdl submit_task -n <name>` | 投递 WDL 任务 |
-| `dcs wdl tasks` / `task_info` / `task_log` / `start` / `cancel` / `rm` | 任务管理 |
+| `dcs workflow ls` | 列流程（`-p` 公共库） |
+| `dcs workflow info -n <name>` | 流程详情 |
+| `dcs workflow plan -n <name>` | 多步规划 |
+| `dcs workflow check_parameter -n <name>` | 查参数规格 |
+| `dcs workflow submit_task -n <name>` | 投递 WDL 任务 |
+| `dcs workflow tasks` / `task_info` / `task_log` / `start` / `cancel` / `rm` | 任务管理 |
 
-标准流程：`wdl ls` → `plan` → `check_parameter` → `submit_task`
+标准流程：`workflow ls` → `plan` → `check_parameter` → `submit_task`
 
 ---
 
