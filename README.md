@@ -71,7 +71,7 @@ if ($actual -ne $expected.Trim()) { throw "SHA256 mismatch: $actual != $expected
 | `dcs-darwin-amd64` | `9043eab87228d4cf2995c9f9904122ab48521c549a453b8c45a7f1de6223be6a` |
 | `dcs-darwin-arm64` | `2576f3d5c2102015df8e6c5530aaceb5fbb6443ec10d1502f7690d6a04f5b1ec` |
 | `dcs-darwin-universal` | `842c8ef0f533d8c3184fd36bdd59900739899324fb92ff2f3aad4d63a1d66dff` |
-| `dcs.exe` | `dfb80c5ba050063cde52909aa724f0be46155b27dfe8886c43e2c06d91943a92` |
+| `dcs.exe` | `83dba6bd8d1defc00d4db3b6ada8f72a4d91aa453f6911f36c5ed38e8f35b49e` |
 
 ### 历史版本
 
